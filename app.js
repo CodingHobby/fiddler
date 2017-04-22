@@ -1,11 +1,11 @@
 'use strict'
 
 let fiddles = [
-	'hello, world',
-	'more',
-	'stuff',
-	'to',
-	'render'
+	'1 + 2',
+	'(function() {return 7})()',
+	'[1, 2, 3]',
+	'"Hello".split("").reverse().join("")',
+	'alert("Hi!")'
 ]
 
 let selectedSegment
