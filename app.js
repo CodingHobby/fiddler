@@ -72,7 +72,7 @@ let actions = [
 		description: "Evaluates the selected segment",
 		action: "EVALUATE_SEGMENT",
 		title: "Evaluate segment",
-		shortcut: "Ctrl+Alt+D"
+		shortcut: "Ctrl+Enter"
 	}
 ]
 
