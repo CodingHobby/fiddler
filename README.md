@@ -10,4 +10,6 @@ I hope you find this entertaining! Basically, what this does, is it evaluetes in
 
 You can add and delete segments through a commander, which you can launch by pressing `ctrl+alt+P`, by either clicking on the icons or pressing the relative keyboard shortcuts.
 
+You can then press **CTRL+ENTER** to execute a fiddle!
+
 Have fun!
