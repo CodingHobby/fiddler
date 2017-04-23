@@ -81,7 +81,7 @@ let buttons = actions.map(action => {
 	let title = new Element('h3', action.title).render()
 
 	let description = new Element('p', action.description).render()
-
+ 
 	let shortcut = new Element('footer', action.shortcut).render()
 
 	let out = new Element('div')
