@@ -67,6 +67,12 @@ let actions = [
 		action: "DELETE_SEGMENT",
 		title: "Delete segment",
 		shortcut: "Ctrl+Alt+D"
+	},
+	{
+		description: "Evaluates the selected segment",
+		action: "EVALUATE_SEGMENT",
+		title: "Evaluate segment",
+		shortcut: "Ctrl+Alt+D"
 	}
 ]
 
@@ -91,6 +97,16 @@ let buttons = actions.map(action => {
 			return out
 				.on('click', e => deleteSegment(selectedSegment.el.getAttribute('key')))
 				.render()
+		case 'EVALUATE_SEGMENT':
+			return out
+				.on('click', e => selectedSegment
+					.children()[1]
+					.content(
+					eval(selectedSegment.children()[0]
+						.value())
+					)
+				)
+				.render()
 	}
 	return out
 })
@@ -111,11 +127,18 @@ window.addEventListener('keyup', e => {
 				deleteSegment(selectedSegment.el.getAttribute('key'))
 				break
 		}
+	} else {
+		if(e.keyCode == 27) {
+			if(popup.el.classList.contains('active')) {
+				popup.removeClass('active')
+				segments.toggleClass('blur')
+			}
+		}
 	}
 })
 
 function addSegment() {
-	fiddles.push('New Segment')
+	fiddles.push('2 + 2')
 	document.body.innerHTML = ''
 	segments = new Element('div')
 		.addChild(list(fiddles))

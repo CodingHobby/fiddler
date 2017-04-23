@@ -132,7 +132,7 @@ if(false) {
 "use strict";
 
 
-var fiddles = ['hello, world', 'more', 'stuff', 'to', 'render'];
+var fiddles = ['1 + 2', '(function() {return 7})()', '[1, 2, 3]', '"Hello".split("").reverse().join("")', 'alert("Hi!")'];
 
 var selectedSegment = void 0;
 
@@ -182,6 +182,11 @@ var actions = [{
 	action: "DELETE_SEGMENT",
 	title: "Delete segment",
 	shortcut: "Ctrl+Alt+D"
+}, {
+	description: "Evaluates the selected segment",
+	action: "EVALUATE_SEGMENT",
+	title: "Evaluate segment",
+	shortcut: "Ctrl+Alt+D"
 }];
 
 var buttons = actions.map(function (action) {
@@ -201,6 +206,10 @@ var buttons = actions.map(function (action) {
 		case 'DELETE_SEGMENT':
 			return out.on('click', function (e) {
 				return deleteSegment(selectedSegment.el.getAttribute('key'));
+			}).render();
+		case 'EVALUATE_SEGMENT':
+			return out.on('click', function (e) {
+				return selectedSegment.children()[1].content(eval(selectedSegment.children()[0].value()));
 			}).render();
 	}
 	return out;
@@ -222,11 +231,18 @@ window.addEventListener('keyup', function (e) {
 				deleteSegment(selectedSegment.el.getAttribute('key'));
 				break;
 		}
+	} else {
+		if (e.keyCode == 27) {
+			if (popup.el.classList.contains('active')) {
+				popup.removeClass('active');
+				segments.toggleClass('blur');
+			}
+		}
 	}
 });
 
 function addSegment() {
-	fiddles.push('New Segment');
+	fiddles.push('2 + 2');
 	document.body.innerHTML = '';
 	segments = new Element('div').addChild(list(fiddles)).render();
 	popup.removeClass('active').render();
@@ -2171,7 +2187,7 @@ exports = module.exports = __webpack_require__(6)(undefined);
 
 
 // module
-exports.push([module.i, "body,html{width:100%;height:100%;overflow-x:hidden;position:relative}input[type=text]{padding:10px;width:90%;font-size:20px;border:none}input[type=text]:focus{display:block;outline:none}.segment{margin-left:5px}.segment.active{margin-left:0;border-left:5px solid #add8e6}p.eval{margin-left:10px;margin-right:20px;padding:10px;font-size:20px;background-color:#e9e9e9;min-height:25px}.popup{min-height:80%;min-width:80%;position:absolute;top:7%;left:10%;z-index:1;background:#e3e3e3;display:none;padding-left:2%;padding-top:50px}.popup.active{display:block}.blur{filter:blur(2px)}.blur,.command{transition:all .3s ease-in-out}.command{display:inline-block;margin-right:2%;background:#fff;width:47%;height:200px;font-size:30px;text-align:center;padding-left:10px;margin-bottom:20px}.command:hover{background:#f5f5f5}.command h3{font-weight:400;margin-top:30px}.command footer,.command p{font-weight:lighter;display:block;text-align:left;font-size:20px}", ""]);
+exports.push([module.i, "body,html{width:100%;height:100%;overflow-x:hidden;position:relative}input[type=text]{padding:5px;width:100%;font-size:18px;border:none}input[type=text]:focus{display:block;outline:none}.segment{margin-left:5px}.segment.active{margin-left:0;border-left:5px solid #add8e6}p.eval{margin-left:5px;margin-right:20px;padding:10px;font-size:20px;background-color:#e9e9e9;min-height:25px}.popup{min-height:80%;min-width:80%;position:absolute;top:7%;left:10%;z-index:1;background:#e3e3e3;display:none;padding-left:2%;padding-top:50px}.popup.active{display:block}.blur{filter:blur(2px)}.blur,.command{transition:all .3s ease-in-out}.command{display:inline-block;margin-right:2%;background:#fff;width:30%;height:200px;font-size:30px;text-align:center;padding-left:10px;margin-bottom:20px}.command:hover{background:#f5f5f5}.command h3{font-weight:400;margin-top:30px}.command footer,.command p{font-weight:lighter;display:block;text-align:left;font-size:20px}", ""]);
 
 // exports
 
